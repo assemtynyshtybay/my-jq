@@ -5,7 +5,7 @@ import logo from "../assets/logo_jq.svg"
 
 
 export const Navbar = () => {
-// const navigate = useNavigate()
+const navigate = useNavigate()
 // const {token} = useContext(Auth)
 
 return (
@@ -16,7 +16,7 @@ return (
 
                     <Box sx={{flexGrow: 0.1, display: 'flex'}}>
                         <Button
-                            // onClick={() => navigate('/')}
+                            onClick={() => navigate('/main')}
                             sx={{my: 2, color: 'white', display: 'block'}}
                         >
                         Главная
@@ -24,7 +24,7 @@ return (
                     </ Box>
                     <Box sx={{flexGrow: 3, display: 'flex'}}>
                         <Button
-                            // onClick={() => navigate('/')}
+                            onClick={() => navigate('/main')}
                             sx={{my: 2, color: 'white', display: 'block'}}
                         >
                         О нас 
@@ -32,7 +32,7 @@ return (
                     </ Box>
                     <Box sx={{flexGrow:0 , display: 'flex'}}>
                         <Button
-                            // onClick={() => navigate('/')}
+                            onClick={() => navigate('/sign-in')}
                             sx={{my: 2, color: 'white', display: 'block'}}
                         >
                         Вход 
@@ -40,7 +40,7 @@ return (
                     </ Box>
                     <Box sx={{flexGrow: 0, display: 'flex'}}>
                         <Button
-                            // onClick={() => navigate('/')}
+                            onClick={() => navigate('/sign-up')}
                             sx={{my: 2, color: 'white', display: 'block'}}
                         >
                         Регистрация  

@@ -1,11 +1,11 @@
-import styled from "@emotion/styled";
+// import styled from "@emotion/styled";
 import { FormControl, OutlinedInput } from "@mui/material";
-import search  from "../assets/search-svgrepo-com.svg"
-import '../Search.css';
+import search  from "../../assets/search-svgrepo-com.svg"
+import './Search.css';
 
-const styledImage = styled('img')`
-    color: rgba(0,0,0,0.5);
-`
+// const styledImage = styled('img')`
+//     color: rgba(0,0,0,0.5);
+// `
 
 
 export const Search = () => {
