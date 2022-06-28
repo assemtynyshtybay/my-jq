@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import SignUp from './components/authorization/signUp';
+import { Navbar } from './components/Navbar';
 
 function App() {
   return (
-    <div>
-      <SignUp />
+    <div className="App">
+       <Navbar />
     </div>
   );
 }
