@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import SignIn from './components/authorization/signIn';
 import SignUp from './components/authorization/signUp';
-import { Navbar } from './components/Navbar';
+import { Navbar } from './components/Navbar/Navbar';
 import { Search } from './components/search-panel/Search';
 
 function App() {
@@ -13,7 +13,8 @@ function App() {
       <Routes>
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/main" element={<SignUp />} />
+        <Route path="/" element={<SignUp />} />
+        <Route path="/about-us" element={<SignUp />} />
       </Routes>
     </BrowserRouter>
   );

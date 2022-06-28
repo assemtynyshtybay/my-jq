@@ -9,9 +9,11 @@ import {
   OutlinedInput,
   FormControl,
   InputLabel,
+  ThemeProvider,
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import styled from '@emotion/styled';
+import style from '../../style/style';
 
 const Form = styled('form')`
   position: absolute;
@@ -44,11 +46,11 @@ const SignIn = () => {
   };
 
   return (
-    <>
+    <ThemeProvider theme={style}>
       <Container maxWidth="sm">
         <div className="sign-in">
           <Form>
-            <FormControl sx={{ m: 1}} variant="outlined">
+            <FormControl sx={{ m: 1 }} variant="outlined">
               <InputLabel htmlFor="outlined-adornment-password">Имя пользователя</InputLabel>
               <OutlinedInput
                 id="outlined-adornment-password"
@@ -68,7 +70,11 @@ const SignIn = () => {
                       onClick={handleClickShowPassword}
                       onMouseDown={handleMouseDownPassword}
                       edge="end">
-                      {!cVisibility ? <VisibilityOff /> : <Visibility />}
+                      {!cVisibility ? (
+                        <VisibilityOff color="secondary" />
+                      ) : (
+                        <Visibility color="secondary"  />
+                      )}
                     </IconButton>
                   </InputAdornment>
                 }
@@ -76,7 +82,7 @@ const SignIn = () => {
               />
             </FormControl>
             <Buttons>
-              <Button type="submit" variant="contained">
+              <Button type="submit" variant="contained" color="secondary">
                 Войти
               </Button>
             </Buttons>
@@ -87,7 +93,7 @@ const SignIn = () => {
           </Dialog>
         </div>
       </Container>
-    </>
+    </ThemeProvider>
   );
 };
 
