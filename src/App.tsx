@@ -4,7 +4,6 @@ import './App.css';
 import SignIn from './components/authorization/signIn';
 import SignUp from './components/authorization/signUp';
 import { Navbar } from './components/Navbar/Navbar';
-import { Search } from './components/search-panel/Search';
 
 function App() {
   return (
