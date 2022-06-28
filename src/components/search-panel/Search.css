@@ -1,0 +1,18 @@
+.S-logo{
+    height: 4vmin; 
+    
+    color: rgba(0,0,0,0.5);
+  }
+  .container{
+    position: absolute;
+    width: 890px;
+    height:80px;
+    left: 450px;
+    top:470px;
+    background-color: antiquewhite;
+    border-radius: 18px;
+    /* box-shadow: 0px 1px 22px 1px rgba(69, 64, 219, 0.04); */
+
+
+  }
+  
