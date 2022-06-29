@@ -1,20 +1,23 @@
 // import styled from "@emotion/styled";
-import { FormControl, OutlinedInput } from "@mui/material";
+import { Button, FormControl, OutlinedInput, ThemeProvider } from "@mui/material";
 import search  from "../../assets/search-svgrepo-com.svg"
+import style from "../../style/style";
 import './Search.css';
 
 // const styledImage = styled('img')`
 //     color: rgba(0,0,0,0.5);
-// `
+// `    
 
 
 export const Search = () => {
+
     return (
+        <ThemeProvider theme={style}>
         <div className="container">
-        
-        <FormControl sx={{ m: 1, width: '100ch' }} variant="outlined">
+        <FormControl sx={{ m: 2, width: '100ch' }} variant="outlined">
         <OutlinedInput
-            id="outlined-adornment-weight"
+            color="secondary"
+            style={{borderRadius: '10px',fontSize: '16px'}}
             // value={values.weight}
             // onChange={handleChange('weight')}
             endAdornment={<img src={search} className="S-logo" alt="logo" />}
@@ -24,10 +27,18 @@ export const Search = () => {
             // }}
         />
         {/* <FormHelperText id="outlined-weight-helper-text">Weight</FormHelperText> */}
-        </FormControl>
-
-
+        </FormControl>      
+      
+        <Button
+            color="secondary" 
+            size="large"
+            style={{fontSize: '20px',padding: '5px',marginRight: '10px'}}
+            variant="text"
+        >
+            Поиск
+        </Button>
         </div>
+        </ThemeProvider>
         // <div className="container">
         // <img  src={search} className="S-logo" alt="logo" />
         // <input type="text" placeholder="Поиск по загаловку"/>
