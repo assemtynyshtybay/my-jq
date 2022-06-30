@@ -34,7 +34,7 @@ const Buttons = styled('div')`
 const SignIn = () => {
   const [cVisibility, setCVisibility] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
-  const [text, setText] = useState('');
+  const [text] = useState('');
   function handleClose() {
     setIsOpen(false);
   }
