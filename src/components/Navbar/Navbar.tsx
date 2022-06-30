@@ -1,23 +1,19 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import {
   AppBar,
   Box,
   Button,
   styled,
   Container,
-  IconButton,
-  Menu,
-  MenuItem,
   Toolbar,
   ThemeProvider,
 } from '@mui/material';
-import { MoreVertSharp } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo_jq.svg';
 import style from '../../style/style';
 
 const Img = styled('img')`
-  padding: 2.5px;
+  padding: 5px;
 `;
 
 export const Navbar = () => {
