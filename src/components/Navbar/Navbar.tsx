@@ -1,13 +1,5 @@
-import React from 'react';
-import {
-  AppBar,
-  Box,
-  Button,
-  styled,
-  Container,
-  Toolbar,
-  ThemeProvider,
-} from '@mui/material';
+import React, { FC } from 'react';
+import { AppBar, Box, Button, styled, Container, Toolbar, ThemeProvider } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo_jq.svg';
 import style from '../../style/style';
@@ -15,10 +7,11 @@ import style from '../../style/style';
 const Img = styled('img')`
   padding: 5px;
 `;
-
-export const Navbar = () => {
+type Props={
+    token: string | null
+}
+export const Navbar:FC<Props> = ({token}) => {
   const navigate = useNavigate();
-
   return (
     <ThemeProvider theme={style}>
       <AppBar position="static" color="secondary">
@@ -26,33 +19,45 @@ export const Navbar = () => {
           <Toolbar disableGutters>
             <Img src={logo} className="App-logo" alt="logo" />
             <Box sx={{ flexGrow: 0.1 }}>
-            <Button
+              <Button
                 onClick={() => navigate('/')}
                 sx={{ my: 2, color: 'white', display: 'block' }}>
                 Главная
-            </Button>
+              </Button>
             </Box>
-            <Box sx={{ flexGrow: 3}}>
-            <Button
+            <Box sx={{ flexGrow: 3 }}>
+              <Button
                 onClick={() => navigate('/about-us')}
                 sx={{ my: 2, color: 'white', display: 'block' }}>
                 О нас
-            </Button>
+              </Button>
             </Box>
-            <Box sx={{ flexGrow: 0}}>
-            <Button
-                onClick={() => navigate('/sign-in')}
-                sx={{ my: 2, color: 'white', display: 'block' }}>
-                Вход
-            </Button>
-            </Box>
-            <Box sx={{ flexGrow: 0 }}>
-            <Button
-                onClick={() => navigate('/sign-up')}
-                sx={{ my: 2, color: 'white', display: 'block' }}>
-                Регистрация
-            </Button>
-            </Box>
+            {token ? (
+              <Box sx={{ flexGrow: 0 }}>
+                <Button
+                  onClick={() => navigate('/sign-in')}
+                  sx={{ my: 2, color: 'white', display: 'block' }}>
+                  Выход
+                </Button>
+              </Box>
+            ) : (
+              <div style={{display: 'flex'}}>
+                <Box sx={{ flexGrow: 0 }}>
+                  <Button
+                    onClick={() => navigate('/sign-in')}
+                    sx={{ my: 2, color: 'white', display: 'block' }}>
+                    Вход
+                  </Button>
+                </Box>
+                <Box sx={{ flexGrow: 0 }}>
+                  <Button
+                    onClick={() => navigate('/sign-up')}
+                    sx={{ my: 2, color: 'white', display: 'block' }}>
+                    Регистрация
+                  </Button>
+                </Box>
+              </div>
+            )}
           </Toolbar>
         </Container>
       </AppBar>
