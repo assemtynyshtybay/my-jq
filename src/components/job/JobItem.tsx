@@ -1,5 +1,5 @@
-
 import { Button, Container, styled } from "@mui/material";
+import { FC } from "react";
 
 const Box = styled('div')`
   width: 340px;
@@ -26,12 +26,19 @@ const Salary = styled('div')`
 const Title= styled('div')`
   
 `
-export function JobItem(){
+export type Job = {
+  title: string;
+  id: number
+}
+type Props = {
+  job: Job
+}
+export const JobItem:FC<Props> = ({job}) => {
     return(  
     <Box >  
-        <Title>Senior Front Developer</Title>
-        <Salary>1900</Salary>
+        <Title>{job.title}</Title>
         <Description>BLA BLA </Description>
+        <Salary>1900</Salary>
         <Button 
         variant="contained" 
         style={{fontSize: '15px',padding: '6px', color: "white", backgroundColor: '#9D355D'}}
