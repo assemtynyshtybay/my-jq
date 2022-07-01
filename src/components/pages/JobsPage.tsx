@@ -21,11 +21,11 @@ export function JobsPage(){
         dispatch(fetchJobs() as any);
     }, [dispatch])  
     return(
-        <Grid container spacing={4}>
+        <Grid container spacing={3} >
             {
                 jobs?.map((item: any) => 
                 <Grid item xs={4}>
-                <JobItem key={item.id} job={item}/>
+                    <JobItem key={item.id} job={item}/>
                 </Grid>
                 )
             }

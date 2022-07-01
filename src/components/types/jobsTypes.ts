@@ -3,7 +3,22 @@ import { string } from "yup";
 
 export enum JobActionType {
     FETCH_JOBS = 'FETCH_JOBS',
-   
+};
+
+export type Job = {
+    id: string;
+    name: string;
+    department: string | null;
+    has_test: boolean;
+    area: Area;
+    salary: Salary | null;
+    schedule: Schedule;
+    published_at: string;
+    created_at: string;
+    description: string;  
+    snippet: Snippet;  
+    employer: Employer;
+
 };
 export type Area = {
     id: string;
@@ -24,19 +39,7 @@ type Schedule = {
     id: string| null;
     name: string| null;
 }
-export type Job = {
-    id: string;
-    name: string;
-    department: string | null;
-    has_test: boolean;
-    area: Area;
-    salary: Salary | null;
-    schedule: Schedule;
-    published_at: string;
-    created_at: string;
-    description: string;  
-    snippet: Snippet;  
-};
+
 
 export type JobState = {
     jobs: Job[];
@@ -47,6 +50,9 @@ export type FetchJobAction = {
     type: JobActionType.FETCH_JOBS,
     payload: any;
 };
+export type Employer = {
+    name?: string;
+}
 
 
 export type JobAction = FetchJobAction;
