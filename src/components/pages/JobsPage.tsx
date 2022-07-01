@@ -3,30 +3,33 @@ import axios from "axios";
 import { useMemo } from "react";
 import { useEffect } from "react";
 import { Job, JobItem } from "../job/JobItem";
-// import {useDispatch, useSelector} from "react-redux";
-import { fetchJobs } from "../store/actions/fetchJobs";
+import {useDispatch, useSelector} from "react-redux";
+import { jobs } from "../store/reducers/jobs";
+import { fetchJobs } from "../store/actions/jobActionCreator";
+import { AnyAction } from "redux";
+import { useTypedSelector } from "../hooks/useTypedSelector";
 
-  
 export function JobsPage(){
-    // const jobs = useSelector((state) => state.jobs.jobs)
-    // const dispatch = useDispatch()
-    // useEffect(() => {
-    //     dispatch(fetchJobs())
-    // }, [dispatch])  
-    const jobs = fetchJobs()
 
+    const jobs = useTypedSelector((state: any) => state.job.jobs)
+    const dispatch = useDispatch();
+    
+    
+    useEffect(() => {
+        dispatch(fetchJobs() as any);
+    }, [dispatch])  
     return(
         <>
             {
-                jobs && jobs.map((item) => {
-                    <JobItem key={item.id} job={item}/>
-                })
+            jobs?.map((item: any) => 
+            <JobItem key={item.id} job={item}/>
+            )
+
             }
         </>
     ) 
 }
 
-function useCallBack(arg0: void, arg1: never[]) {
-    throw new Error("Function not implemented.");
-}
+
+
 

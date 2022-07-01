@@ -7,6 +7,7 @@ export function MainPage(){
         <div>
             <Search />
             <JobsPage />
+            
         </div>
     )
 }

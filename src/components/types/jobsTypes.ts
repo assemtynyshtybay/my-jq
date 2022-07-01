@@ -1,22 +1,24 @@
 export enum JobActionType {
-    FETCH_JOBS = 'FETCH_JOBS'
-}
-
+    FETCH_JOBS = 'FETCH_JOBS',
+   
+};
 export type Job = {
-    id: number,
-    title: string,
-    salary: number,
-    description: string 
-}
-
+    id: number;
+    title: string;
+    salary: number;
+    description: string;    
+};
 
 export type JobState = {
-    jobs: Job[]
-}
+    jobs: Job[];
+    loading: boolean;
+
+};
 export type FetchJobAction = {
     type: JobActionType.FETCH_JOBS,
-}
+    payload: any;
+};
 
 
-export type UserAction = FetchJobAction 
+export type JobAction = FetchJobAction;
  

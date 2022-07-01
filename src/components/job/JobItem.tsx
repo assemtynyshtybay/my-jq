@@ -34,6 +34,8 @@ type Props = {
   job: Job
 }
 export const JobItem:FC<Props> = ({job}) => {
+  console.log(job);
+
     return(  
     <Box >  
         <Title>{job.title}</Title>

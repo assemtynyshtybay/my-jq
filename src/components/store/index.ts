@@ -1,20 +1,10 @@
+import { jobs } from "./reducers/jobs";
+import { applyMiddleware, combineReducers, createStore } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+import thunk from "redux-thunk";
+const rootReducer = combineReducers({
+    job: jobs,
+  });
+  export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
-type Job = {
-    name: string,
-    company: string,
-    time: string,
-    salary: number
-}
-const initState = {
-    job: [],
-    pageInfo: {
-        page: 0,
-        maxPage: 50
-    }
-}
-
-export const JQReducer = (state = initState) => {
-    const newState = {...state}
-  
-    return newState
-}
+export type IState = ReturnType<typeof rootReducer>;
