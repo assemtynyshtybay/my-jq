@@ -16,7 +16,7 @@ export const jobs: Reducer<JobState, JobAction> = (
         switch (action.type) {
             case JobActionType.FETCH_JOBS:
                 newState.jobs = action.payload;
-                 break;
+                break;
             default:
             return state;
     }

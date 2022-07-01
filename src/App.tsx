@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import SignIn from './components/authorization/signIn';
 import SignUp from './components/authorization/signUp';
+import JobDetails from './components/job/JobDetail';
 import { Navbar } from './components/Navbar/Navbar';
 import { MainPage } from './components/pages/MainPage';
 import { Auth } from './context/Auth';
@@ -32,6 +33,7 @@ function App() {
           <Route path="/sign-up" element={<SignUp login={login} />} />
           <Route path="/" element={<MainPage />} />
           <Route path="/about-us" element={<MainPage/>} />
+          <Route path="/job-details/:id" element={<JobDetails/>} />
         </Routes>
       </BrowserRouter>
     </Auth.Provider>

@@ -1,5 +1,7 @@
 import { Button, Container, styled } from "@mui/material";
 import { FC } from "react";
+import { useNavigate } from "react-router-dom";
+import { Job } from "../types/jobsTypes";
 
 const Box = styled('div')`
   width: 340px;
@@ -26,25 +28,25 @@ const Salary = styled('div')`
 const Title= styled('div')`
   
 `
-export type Job = {
-  title: string;
-  id: number
-}
+const Time= styled('div')`
+  
+`
 type Props = {
   job: Job
 }
 export const JobItem:FC<Props> = ({job}) => {
-  console.log(job);
-
+    const navigate = useNavigate()
     return(  
     <Box >  
-        <Title>{job.title}</Title>
-        <Description>BLA BLA </Description>
-        <Salary>1900</Salary>
+        <Title>{job.name}</Title>
+        <Time>{job.published_at}</Time>
+        <Description>{job.schedule.name}</Description>
+        <Salary>{job.salary?.from}тг до {job.salary?.to}тг </Salary>
         <Button 
-        variant="contained" 
-        style={{fontSize: '15px',padding: '6px', color: "white", backgroundColor: '#9D355D'}}
-        >Apply Now</Button>
+          variant="contained"
+          onClick={() => navigate(`/job-details/${+job.id}`)}
+          style={{fontSize: '15px',padding: '6px', color: "white", backgroundColor: '#9D355D'}}
+        >Откликнуться</Button>
     </Box>
     
     )
