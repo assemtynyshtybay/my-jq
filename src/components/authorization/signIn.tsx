@@ -19,8 +19,9 @@ import style from '../../style/style';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
+import * as yup from 'yup';
+
 import { User } from '../../types/user';
-import { formValidation } from './signUp';
 
 const Form = styled('form')`
   position: absolute;
@@ -37,7 +38,10 @@ const Form = styled('form')`
 const Buttons = styled('div')`
   margin: 0 auto;
 `;
-
+export const formValidationIn = yup.object().shape({
+  email: yup.string().required(''),
+  password: yup.string().required(''),
+});
 const SignIn = () => {
   const [visibility, setVisibility] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
@@ -50,12 +54,14 @@ const SignIn = () => {
     handleSubmit,
   } = useForm<User>({
     mode: 'onTouched',
-    resolver: yupResolver(formValidation),
+    resolver: yupResolver(formValidationIn),
   });
-  const onSubmit: SubmitHandler<User> = (data: User) => {
+
+  const onSubmit = (data: User) => {
     console.log(data);
     setUserData(data);
   };
+
   function handleClose() {
     setIsOpen(false);
   }
