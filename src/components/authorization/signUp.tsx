@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import {
@@ -53,8 +53,10 @@ export const formValidation = yup.object().shape({
     .min(8, '**Пароль должен содержать как минимум 8 символов!')
     .oneOf([yup.ref('password')], '**Пароли не совпадают!'),
 });
-
-const SignUp = () => {
+type Props = {
+  login(token: string | null): void;
+};
+const SignUp: FC<Props> = ({ login }) => {
   const [visibility, setVisibility] = useState(true);
   const [cVisibility, setCVisibility] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
@@ -100,6 +102,7 @@ const SignUp = () => {
         console.log(data.data.idToken);
         setText('Успешно✅');
         setIsOpen(true);
+        login(data.data.idToken);
         localStorage.setItem('idToken', data.data.idToken);
         setTimeout(() => {
           navigate('/');
@@ -117,8 +120,7 @@ const SignUp = () => {
       <div>
         <Container maxWidth="sm">
           <div style={{ marginTop: '10px' }}>
-            <Form
-              onSubmit={handleSubmit(onSubmit)}>
+            <Form onSubmit={handleSubmit(onSubmit)}>
               <Typography
                 color="secondary"
                 style={{ textAlign: 'center', marginBottom: '5px' }}
@@ -127,12 +129,7 @@ const SignUp = () => {
               </Typography>
               <FormControl sx={{ m: 1 }} variant="outlined">
                 <InputLabel htmlFor="email">E-mail</InputLabel>
-                <OutlinedInput
-                  {...register('email')}
-                  id="email"
-                  type="text"
-                  label="E-mail"
-                />
+                <OutlinedInput {...register('email')} id="email" type="text" label="E-mail" />
                 {errors.email?.message}
               </FormControl>
               {/* <FormControl sx={{ m: 1 }} variant="outlined">

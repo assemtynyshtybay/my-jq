@@ -8,7 +8,7 @@ import { MainPage } from './components/pages/MainPage';
 import { Auth } from './context/Auth';
 
 function App() {
-  const [token, setToken] = useState<string | null>(null);
+  const [token, setToken] = useState<string | null>(localStorage.getItem('idToken') || null);
 
   const login = useCallback((token: string) => {
     setToken(token);
@@ -22,16 +22,16 @@ function App() {
       value={{
         token: token,
         isLoggedIn: !!token,
-        login: login, //  **** TS2322 Error at this line ****
+        login: login,
         logout: logout,
       }}>
       <BrowserRouter>
-        <Navbar token={token} />
+        <Navbar token={token} logout={logout}/>
         <Routes>
-          <Route path="/sign-in" element={<SignIn />} />
-          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/sign-in" element={<SignIn login={login} />} />
+          <Route path="/sign-up" element={<SignUp login={login} />} />
           <Route path="/" element={<MainPage />} />
-          <Route path="/about-us" element={<SignUp />} />
+          <Route path="/about-us" element={<MainPage/>} />
         </Routes>
       </BrowserRouter>
     </Auth.Provider>

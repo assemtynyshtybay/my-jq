@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import {
@@ -13,7 +13,7 @@ import {
   InputLabel,
   ThemeProvider,
 } from '@mui/material';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { Login, Visibility, VisibilityOff } from '@mui/icons-material';
 import styled from '@emotion/styled';
 import style from '../../style/style';
 import { useForm, SubmitHandler } from 'react-hook-form';
@@ -42,7 +42,10 @@ export const formValidationIn = yup.object().shape({
   email: yup.string().required(''),
   password: yup.string().required(''),
 });
-const SignIn = () => {
+type Props = {
+  login(token: string | null): void;
+};
+const SignIn: FC<Props> = ({ login }) => {
   const [visibility, setVisibility] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [text, setText] = useState('');
@@ -83,6 +86,7 @@ const SignIn = () => {
       )
       .then((data) => {
         console.log(data.data.idToken);
+        login(data.data.idToken);
         localStorage.setItem('idToken', data.data.idToken);
         setTimeout(() => {
           navigate('/');

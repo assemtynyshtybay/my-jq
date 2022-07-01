@@ -1,17 +1,25 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import { AppBar, Box, Button, styled, Container, Toolbar, ThemeProvider } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo_jq.svg';
 import style from '../../style/style';
+import { Auth } from '../../context/Auth';
 
 const Img = styled('img')`
   padding: 5px;
 `;
-type Props={
-    token: string | null
-}
-export const Navbar:FC<Props> = ({token}) => {
+type Props = {
+  token: string | null;
+  logout(): void;
+};
+export const Navbar: FC<Props> = ({ token, logout }) => {
   const navigate = useNavigate();
+  const logOut = useCallback(() => {
+    console.log('tok', token);
+    logout();
+    localStorage.clear();
+    navigate('sign-in');
+  }, []);
   return (
     <ThemeProvider theme={style}>
       <AppBar position="static" color="secondary">
@@ -34,14 +42,12 @@ export const Navbar:FC<Props> = ({token}) => {
             </Box>
             {token ? (
               <Box sx={{ flexGrow: 0 }}>
-                <Button
-                  onClick={() => navigate('/sign-in')}
-                  sx={{ my: 2, color: 'white', display: 'block' }}>
+                <Button onClick={logOut} sx={{ my: 2, color: 'white', display: 'block' }}>
                   Выход
                 </Button>
               </Box>
             ) : (
-              <div style={{display: 'flex'}}>
+              <div style={{ display: 'flex' }}>
                 <Box sx={{ flexGrow: 0 }}>
                   <Button
                     onClick={() => navigate('/sign-in')}
@@ -64,3 +70,6 @@ export const Navbar:FC<Props> = ({token}) => {
     </ThemeProvider>
   );
 };
+function useContext(Auth: any): { token: any; login: any } {
+  throw new Error('Function not implemented.');
+}
