@@ -22,6 +22,7 @@ import { useNavigate } from 'react-router-dom';
 
 import style from '../../style/style';
 import { User } from '../../types/user';
+
 const Form = styled('form')`
   position: absolute;
   top: 50%;

@@ -3,7 +3,7 @@ import { string } from "yup";
 
 export enum JobActionType {
     FETCH_JOBS = 'FETCH_JOBS',
-   
+    FETCH_PAGE = 'FETCH_PAGE',
 };
 export type Area = {
     id: string;
@@ -41,13 +41,18 @@ export type Job = {
 export type JobState = {
     jobs: Job[];
     loading: boolean;
-
+    page: number;
+    total_page: number;
+    per_page: number;
 };
 export type FetchJobAction = {
     type: JobActionType.FETCH_JOBS,
     payload: any;
 };
+export type FetchPageInfo = {
+    type: JobActionType.FETCH_PAGE,
+    payload: any;
+};
 
-
-export type JobAction = FetchJobAction;
+export type JobAction = FetchJobAction | FetchPageInfo;
  
