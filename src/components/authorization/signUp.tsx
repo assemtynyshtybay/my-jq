@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import {
@@ -12,14 +12,16 @@ import {
   FormControl,
   InputLabel,
   ThemeProvider,
+  Typography,
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import styled from '@emotion/styled';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 import style from '../../style/style';
 import { User } from '../../types/user';
-import axios from 'axios';
-
 const Form = styled('form')`
   position: absolute;
   top: 50%;
@@ -35,7 +37,12 @@ const Form = styled('form')`
 const Buttons = styled('div')`
   margin: 0 auto;
 `;
-const formValidation = yup.object().shape({
+export const formValidation = yup.object().shape({
+  email: yup
+    .string()
+    .required('**Почта обязательна!')
+    .max(50, '**Длина пароля должна быть не менее 8 символов!')
+    .matches(/^\S+@\S+$/i, '**Не правильный формат!'),
   password: yup
     .string()
     .required('**Пароль обязателен!')
@@ -46,10 +53,15 @@ const formValidation = yup.object().shape({
     .min(8, '**Пароль должен содержать как минимум 8 символов!')
     .oneOf([yup.ref('password')], '**Пароли не совпадают!'),
 });
-
-const SignUp = () => {
+type Props = {
+  login(token: string | null): void;
+};
+const SignUp: FC<Props> = ({ login }) => {
+  const [visibility, setVisibility] = useState(true);
   const [cVisibility, setCVisibility] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+
   const [text, setText] = useState('');
   const {
     register,
@@ -67,6 +79,9 @@ const SignUp = () => {
     setIsOpen(false);
   }
   const handleClickShowPassword = () => {
+    setVisibility(!visibility);
+  };
+  const handleClickShowCPassword = () => {
     setCVisibility(!cVisibility);
   };
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -84,39 +99,40 @@ const SignUp = () => {
         },
       )
       .then((data) => {
-        console.log(data);
+        console.log(data.data.idToken);
         setText('Успешно✅');
         setIsOpen(true);
+        login(data.data.idToken);
+        localStorage.setItem('idToken', data.data.idToken);
+        setTimeout(() => {
+          navigate('/');
+        }, 3000);
       })
       .catch((error) => {
         console.log({ ...error });
+        setText('Такой пользователь уже существует!');
+        setIsOpen(true);
       });
   };
 
   return (
     <ThemeProvider theme={style}>
-      <Container maxWidth="sm">
-        <div className="sign-in">
-          <Form onSubmit={handleSubmit(onSubmit)}>
-            <FormControl sx={{ m: 1 }} variant="outlined">
-              <InputLabel htmlFor="outlined-adornment-password">E-mail</InputLabel>
-              <OutlinedInput
-                {...register('email', {
-                  required: '**Почта обязательна!',
-                  minLength: {
-                    value: 8,
-                    message: '**Длина пароля должна быть не менее 8 символов',
-                  },
-                  maxLength: 50,
-                  pattern: /^\S+@\S+$/i,
-                })}
-                id="outlined-adornment-password"
-                type="text"
-                label="E-mail"
-              />
-              {/* {errors.email?.type === 'required' && 'Почта обязательна!'} */}
-            </FormControl>
-            {/* <FormControl sx={{ m: 1 }} variant="outlined">
+      <div>
+        <Container maxWidth="sm">
+          <div style={{ marginTop: '10px' }}>
+            <Form onSubmit={handleSubmit(onSubmit)}>
+              <Typography
+                color="secondary"
+                style={{ textAlign: 'center', marginBottom: '5px' }}
+                mt={2}>
+                Регистрация
+              </Typography>
+              <FormControl sx={{ m: 1 }} variant="outlined">
+                <InputLabel htmlFor="email">E-mail</InputLabel>
+                <OutlinedInput {...register('email')} id="email" type="text" label="E-mail" />
+                {errors.email?.message}
+              </FormControl>
+              {/* <FormControl sx={{ m: 1 }} variant="outlined">
                 <InputLabel htmlFor="outlined-adornment-password">Имя пользователя</InputLabel>
                 <OutlinedInput
                   id="outlined-adornment-password"
@@ -124,68 +140,69 @@ const SignUp = () => {
                   label="Имя пользователя"
                 />
               </FormControl> */}
-            <FormControl sx={{ m: 1 }} variant="outlined">
-              <InputLabel htmlFor="outlined-adornment-password">Пароль</InputLabel>
-              <OutlinedInput
-                {...register('password')}
-                id="outlined-adornment-password"
-                type={!cVisibility ? 'text' : 'password'}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end">
-                      {cVisibility ? (
-                        <VisibilityOff color="secondary" />
-                      ) : (
-                        <Visibility color="secondary" />
-                      )}
-                    </IconButton>
-                  </InputAdornment>
-                }
-                label="Пароль"
-              />
-              {errors.password?.type === 'required' && 'Password is required'}
-            </FormControl>
-            <FormControl sx={{ m: 1 }} variant="outlined">
-              <InputLabel htmlFor="outlined-adornment-password">Повторите пароль</InputLabel>
-              <OutlinedInput
-                {...register("cPassword")}
-                id="outlined-adornment-password"
-                type={!cVisibility ? 'text' : 'password'}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end">
-                      {cVisibility ? (
-                        <VisibilityOff color="secondary" />
-                      ) : (
-                        <Visibility color="secondary" />
-                      )}
-                    </IconButton>
-                  </InputAdornment>
-                }
-                label="Повторите пароль"
-              />
-              {errors.cPassword?.type === 'required' && ''}
-            </FormControl>
-            <Buttons>
-              <Button type="submit" variant="contained" color="secondary">
-                Регистрация
-              </Button>
-            </Buttons>
-            {/* { token ? 'AUTHORISED' : 'NOT AUTHORISED'} */}
-          </Form>
-          <Dialog onClose={handleClose} open={isOpen}>
-            <DialogTitle>{text}</DialogTitle>
-          </Dialog>
-        </div>
-      </Container>
+              <FormControl sx={{ m: 1 }} variant="outlined">
+                <InputLabel htmlFor="password">Пароль</InputLabel>
+                <OutlinedInput
+                  {...register('password')}
+                  id="password"
+                  type={!visibility ? 'text' : 'password'}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end">
+                        {visibility ? (
+                          <VisibilityOff color="secondary" />
+                        ) : (
+                          <Visibility color="secondary" />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  label="Пароль"
+                />
+                {errors.password?.message}
+              </FormControl>
+              <FormControl sx={{ m: 1 }} variant="outlined">
+                <InputLabel htmlFor="cPassword">Повторите пароль</InputLabel>
+                <OutlinedInput
+                  {...register('cPassword')}
+                  id="cPassword"
+                  type={!cVisibility ? 'text' : 'password'}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowCPassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end">
+                        {cVisibility ? (
+                          <VisibilityOff color="secondary" />
+                        ) : (
+                          <Visibility color="secondary" />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  label="Повторите пароль"
+                />
+                {errors.cPassword?.message}
+              </FormControl>
+              <Buttons style={{ marginTop: '10px' }}>
+                <Button type="submit" variant="contained" color="secondary">
+                  Регистрация
+                </Button>
+              </Buttons>
+              {/* { token ? 'AUTHORISED' : 'NOT AUTHORISED'} */}
+            </Form>
+            <Dialog onClose={handleClose} open={isOpen}>
+              <DialogTitle>{text}</DialogTitle>
+            </Dialog>
+          </div>
+        </Container>
+      </div>
     </ThemeProvider>
   );
 };
