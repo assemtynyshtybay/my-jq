@@ -5,7 +5,7 @@ import SignIn from './components/authorization/signIn';
 import SignUp from './components/authorization/signUp';
 import JobDetails from './components/job/JobDetail';
 import { Navbar } from './components/Navbar/Navbar';
-import { MainPage } from './components/pages/MainPage';
+import MainPage from './components/pages/MainPage';
 import Profile from './components/profile/profile';
 import { Auth } from './context/Auth';
 
