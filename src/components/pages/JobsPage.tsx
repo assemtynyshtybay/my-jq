@@ -10,16 +10,21 @@ import style from '../../style/style';
 
 export function JobsPage() {
   const jobs = useTypedSelector((state: any) => state.job.jobs);
-  const { page, total_page} = useTypedSelector((state: any) => state.job);
+  const { page, total_page } = useTypedSelector((state: any) => state.job);
+  console.log('pageinfo', page, total_page);
   const dispatch = useDispatch();
   console.log('jobs', jobs);
 
   useEffect(() => {
-    dispatch(fetchJobs({ page: 0 }) as any);
+    dispatch(fetchJobs() as any);
   }, [dispatch]);
-  const fetchJobsPerPage = useCallback(({ page = 0 } = {}) => {
-    fetchJobs({ page });
-  }, []);
+
+  const fetchJobsPerPage = useCallback(
+    ({ page = 0 }) => {
+      dispatch(fetchJobs({ page }) as any);
+    },
+    [dispatch],
+  );
 
   return (
     <ThemeProvider theme={style}>
@@ -34,7 +39,7 @@ export function JobsPage() {
           </Grid>
         ))}
       </Grid>
-      <Container maxWidth="sm">
+      <Container maxWidth="sm" style={{marginTop: '20px', marginBottom: '20px'}}>
         <Pagination
           count={total_page}
           page={page}

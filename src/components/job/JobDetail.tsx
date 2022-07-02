@@ -4,7 +4,7 @@ import { FC } from 'react';
 import { Job } from '../types/jobsTypes';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { fetchSimilarJobs } from '../store/actions/jobActionCreator';
+
 type Props = {
   job: Job;
 };
