@@ -5,6 +5,7 @@ import { Job } from '../types/jobsTypes';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { fetchSimilarJobs } from '../store/actions/jobActionCreator';
+
 type Props = {
   job: Job;
 };
@@ -13,8 +14,8 @@ const Box = styled('div')`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  padding: 20px;
-  font-size: 26px;
+  padding: 10px;
+  font-size: 50px;  
   /* background: linear-gradient(180deg, rgba(29, 29, 29, 0) 0%, rgba(29, 29, 29, 0.8) 80.79%); */
 `;
 const SimilarJob = styled('button')`
@@ -35,11 +36,22 @@ const SimilarJobs = styled('div')`
   width: 55%;
   overflow-x: auto;
 `;
+const Title = styled('div')`
+font-weight: bold;
+color: #000000;
+`;
 
 const Description = styled('div')``;
 const Salary = styled('div')``;
-const Title = styled('div')``;
-const Time = styled('div')``;
+
+const Time = styled('div')`
+
+`;
+const Text =styled('div')`
+  margin: 0 auto;
+  width: 55px;;
+`
+
 const JobDetails = () => {
   const params = useParams();
   const dispatch = useDispatch();
@@ -60,26 +72,34 @@ const JobDetails = () => {
       });
   }, [params.id]);
 
-  console.log('job', job);
+
+  // console.log('job', job);
+
   return (
     <>
       {job && (
         <Box>
-          <Title>{job.name}</Title>
+          <Title>{job.name}/{job.schedule.name} </Title>
+
           <Time>{job.published_at}</Time>
-          <Description>{job.schedule.name}</Description>
+          
+
+          {/* <Description>{job.schedule.name}</Description> */}
+
           <Salary>
-            {job.salary?.from}тг до {job.salary?.to}тг{' '}
+            Зарплата:   
+            {job.salary ? '' : 'Не указано'}
+            {job.salary?.from}  {job.salary?.from ? 'KZT' : null} { job.salary?.to ? 'до' : null} {job.salary?.to} { job.salary?.to ? 'KZT' : null}
           </Salary>
           <Button
             variant="contained"
             style={{
               fontSize: '15px',
-              padding: '6px',
+              padding: '10px',
               width: '20%',
               color: 'white',
               backgroundColor: '#9D355D',
-              marginTop: '10px',
+              marginTop: '20px',
             }}>
             Откликнуться
           </Button>
@@ -88,17 +108,20 @@ const JobDetails = () => {
             onClick={() => navigate('/')}
             style={{
               fontSize: '15px',
-              padding: '6px',
+              padding: '10px',
               color: 'white',
               width: '20%',
               backgroundColor: '#9D355D',
-              marginTop: '10px',
+              marginTop: '20px',
             }}>
             Назад
           </Button>
         </Box>
       )}
+
       <hr />
+      <Text>Similar Jobs </Text>
+      
       <SimilarJobs>
         {similarJobs?.map((job) => (
           <SimilarJob onClick={() => navigate(`/job-details/${+job.id}`)}>
@@ -111,6 +134,7 @@ const JobDetails = () => {
           </SimilarJob>
         ))}
       </SimilarJobs>
+
     </>
   );
 };
