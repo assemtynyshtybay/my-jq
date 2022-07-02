@@ -3,14 +3,16 @@ import { Button, styled } from '@mui/material';
 import { Job } from '../types/jobsTypes';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import Loc from '../../assets/Lock.svg'
 
 const Box = styled('div')`
   width: 50%;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  padding: 10px;
-  font-size: 50px;
+  padding: 50px;
+ font-size: 45px;
+
   /* background: linear-gradient(180deg, rgba(29, 29, 29, 0) 0%, rgba(29, 29, 29, 0.8) 80.79%); */
 `;
 const SimilarJob = styled('button')`
@@ -21,8 +23,9 @@ const SimilarJob = styled('button')`
   padding: 20px;
   border: 1px solid gray;
   border-radius: 10px;
-  font-size: 26px;
+  font-size: 24px;
   text-align: left;
+  font-size: large;
   /* background: linear-gradient(180deg, rgba(150, 29, 29, 0) 0%, rgba(29, 29, 29, 0.8) 99.79%); */
 `;
 const SimilarJobs = styled('div')`
@@ -30,20 +33,40 @@ const SimilarJobs = styled('div')`
   margin: 0 auto;
   width: 55%;
   overflow-x: auto;
+  
+
 `;
 const Title = styled('div')`
   font-weight: bold;
   color: #000000;
+  font-size: 36px;
+  /* font-weight: 400; */
+  font-style: normal;
+  line-height: 42px;
 `;
 
-const Description = styled('div')``;
+const Description = styled('div')`
+
+`;
 const Salary = styled('div')``;
 
-const Time = styled('div')``;
-const Text = styled('div')`
-  margin: 0 auto;
-  width: 55px; ;
+const Time = styled('div')`
+font-size: 32px;
+margin: 20px;
+color: #585858;
 `;
+
+const Text = styled('div')`
+text-align: center;
+font-size: 38px;
+`;
+
+const Location =styled("div")`
+
+`
+const Img=styled('img')`
+  height: 3vmin; 
+`
 
 const JobDetails = () => {
   const params = useParams();
@@ -70,15 +93,21 @@ const JobDetails = () => {
       {job && (
         <Box>
           <Title>
-            {job.name}/{job.schedule.name}{' '}
+            {job.name} / {job.schedule.name}
           </Title>
-          <Time>{job.published_at}</Time>
+          <Time>Вакансия опубликована: {job.published_at}</Time>
+          
+          <Location><Img src={Loc} className="Loc-logo" alt="l-logo" /> {job.area.name}</Location>
+          
           <Salary>
+
             Зарплата:
             {job.salary ? '' : 'Не указано'}
             {job.salary?.from} {job.salary?.from ? 'KZT' : null} {job.salary?.to ? 'до' : null}{' '}
             {job.salary?.to} {job.salary?.to ? 'KZT' : null}
           </Salary>
+          <Description>{job.snippet?.responsibility}</Description>
+
           <Button
             variant="contained"
             style={{
@@ -107,8 +136,7 @@ const JobDetails = () => {
         </Box>
       )}
 
-      <hr />
-      <Text>Similar Jobs </Text>
+      <Text>Похожие запросы</Text>
 
       <SimilarJobs>
         {similarJobs?.map((job) => (
@@ -124,7 +152,7 @@ const JobDetails = () => {
             </Salary>
           </SimilarJob>
         ))}
-      </SimilarJobs>
+      </SimilarJobs> 
     </>
   );
 };
