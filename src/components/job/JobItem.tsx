@@ -54,7 +54,7 @@ export const JobItem: FC<Props> = ({ job }) => {
         variant="contained"
         onClick={() => navigate(`/job-details/${+job.id}`)}
         style={{ fontSize: '15px', padding: '6px', color: 'white', backgroundColor: '#9D355D' }}>
-        Откликнуться
+        Посмотреть
       </Button>
     </Box>
   );
