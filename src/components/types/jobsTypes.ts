@@ -1,29 +1,8 @@
-import { ApplicableRefactorInfo } from "typescript";
-import { string } from "yup";
-
 export enum JobActionType {
     FETCH_JOBS = 'FETCH_JOBS',
     FETCH_PAGE = 'FETCH_PAGE',
 };
-export type Area = {
-    id: string;
-    name: string | null;
-    url: string | null;
-}
-export type Salary = {
-    from?: number | null ;
-    to?: number | null ;
-    currency: string;
-    gross: boolean;
-}
-export type Snippet= {
-    requirement: string | null;
-    responsibility: string | null;
-}
-type Schedule = {
-    id: string| null;
-    name: string| null;
-}
+
 export type Job = {
     id: string;
     name: string;
@@ -36,8 +15,31 @@ export type Job = {
     created_at: string;
     description: string;  
     snippet: Snippet;  
-};
+    employer: Employer;
 
+};
+export type Area = {
+    id: string;
+    name: string | null;
+    url: string | null;
+}
+export type Salary = {
+    from?: number | null ;
+    to?: number | null ;
+    currency: string;
+    gross: boolean;
+}
+export type Employer = {
+    name?: string;
+}
+export type Snippet= {
+    requirement: string | null;
+    responsibility: string | null;
+}
+type Schedule = {
+    id: string| null;
+    name: string| null;
+}
 export type JobState = {
     jobs: Job[];
     loading: boolean;
@@ -53,6 +55,7 @@ export type FetchPageInfo = {
     type: JobActionType.FETCH_PAGE,
     payload: any;
 };
+
 
 export type JobAction = FetchJobAction | FetchPageInfo;
  

@@ -21,7 +21,8 @@ export const jobs: Reducer<JobState, JobAction> = (
                 newState.jobs = action.payload;
                 break;
             case JobActionType.FETCH_PAGE:
-                newState.page = action.payload.page;
+                newState.page = action.payload+1;
+                console.log('page',newState.page)
                 break
             default:
                 return state;

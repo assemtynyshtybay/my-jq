@@ -15,7 +15,6 @@ type Props = {
 export const Navbar: FC<Props> = ({ token, logout }) => {
   const navigate = useNavigate();
   const logOut = useCallback(() => {
-    console.log('tok', token);
     logout();
     localStorage.clear();
     navigate('sign-in');
