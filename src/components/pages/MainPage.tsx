@@ -29,4 +29,5 @@ const MainPage = () => {
       <JobsPage search={search} />
     </Container>
   );
+}
 export default MainPage;
