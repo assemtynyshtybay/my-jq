@@ -6,6 +6,7 @@ import SignUp from './components/authorization/signUp';
 import JobDetails from './components/job/JobDetail';
 import { Navbar } from './components/Navbar/Navbar';
 import { MainPage } from './components/pages/MainPage';
+import Profile from './components/profile/profile';
 import { Auth } from './context/Auth';
 
 function App() {
@@ -27,13 +28,14 @@ function App() {
         logout: logout,
       }}>
       <BrowserRouter>
-        <Navbar token={token} logout={logout}/>
+        <Navbar token={token} logout={logout} />
         <Routes>
           <Route path="/sign-in" element={<SignIn login={login} />} />
           <Route path="/sign-up" element={<SignUp login={login} />} />
           <Route path="/" element={<MainPage />} />
-          <Route path="/about-us" element={<MainPage/>} />
-          <Route path="/job-details/:id" element={<JobDetails/>} />
+          <Route path="/about-us" element={<MainPage />} />
+          <Route path="/job-details/:id" element={<JobDetails />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </BrowserRouter>
     </Auth.Provider>

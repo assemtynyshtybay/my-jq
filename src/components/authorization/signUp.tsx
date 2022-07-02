@@ -65,15 +65,14 @@ const SignUp: FC<Props> = ({ login }) => {
 
   const [text, setText] = useState('');
   const {
-    register,
-    formState: { errors },
-    handleSubmit,
+        register,
+        formState: { errors },
+        handleSubmit,
   } = useForm<User>({
     mode: 'onTouched',
     resolver: yupResolver(formValidation),
   });
   const onSubmit: SubmitHandler<User> = (data: User) => {
-    console.log(data);
     sendUserData(data);
   };
   function handleClose() {

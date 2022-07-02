@@ -1,8 +1,8 @@
 import { Dispatch } from 'react';
 import { JobActionType } from '../../types/jobsTypes';
  
-export const fetchJobs = ({page = 0, perPage= 9}={}) =>(dispatch: Dispatch<any>) => {
-    fetch(`https://api.hh.ru/vacancies?page=${page}&per_page=${perPage}`).then((res) => {
+export const fetchJobs = ({page = 0, perPage= 9, search = ''}={}) =>(dispatch: Dispatch<any>) => {
+    fetch(`https://api.hh.ru/vacancies?page=${page}&per_page=${perPage}&text=${search}`).then((res) => {
         return res.json();
     }).then(data => {
         console.log('full', data)

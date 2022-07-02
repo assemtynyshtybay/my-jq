@@ -40,11 +40,20 @@ export const Navbar: FC<Props> = ({ token, logout }) => {
               </Button>
             </Box>
             {token ? (
-              <Box sx={{ flexGrow: 0 }}>
-                <Button onClick={logOut} sx={{ my: 2, color: 'white', display: 'block' }}>
-                  Выход
-                </Button>
-              </Box>
+              <div style={{ display: 'flex' }}>
+                <Box sx={{ flexGrow: 0 }}>
+                  <Button
+                    onClick={() => navigate('/profile')}
+                    sx={{ my: 2, color: 'white', display: 'block' }}>
+                    Профиль
+                  </Button>
+                </Box>
+                <Box sx={{ flexGrow: 0 }}>
+                  <Button onClick={logOut} sx={{ my: 2, color: 'white', display: 'block' }}>
+                    Выход
+                  </Button>
+                </Box>
+              </div>
             ) : (
               <div style={{ display: 'flex' }}>
                 <Box sx={{ flexGrow: 0 }}>

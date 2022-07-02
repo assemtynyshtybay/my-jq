@@ -43,6 +43,7 @@ export const JobItem: FC<Props> = ({ job }) => {
     <Box>
       <Company>{job.employer.name}</Company>
       <Title>{job.name}</Title>
+      <Description>{job.area.name}</Description>
       <Description>{job.schedule.name}</Description>
 
       {/* <Time>Создано: {job.published_at}</Time> */}

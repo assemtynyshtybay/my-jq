@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useCallback } from 'react';
+import { FC, useCallback } from 'react';
 import { useEffect } from 'react';
 import { JobItem } from '../job/JobItem';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,8 +7,11 @@ import { fetchJobs } from '../store/actions/jobActionCreator';
 import { useTypedSelector } from '../hooks/useTypedSelector';
 import { Container, Grid, Pagination, Stack, styled, ThemeProvider } from '@mui/material';
 import style from '../../style/style';
-
-export function JobsPage() {
+type Props = {
+  search: any;
+};
+const JobsPage: FC<Props> = ({ search }) => {
+  console.log('search', search);
   const jobs = useTypedSelector((state: any) => state.job.jobs);
   const { page, total_page } = useTypedSelector((state: any) => state.job);
   console.log('pageinfo', page, total_page);
@@ -16,12 +19,12 @@ export function JobsPage() {
   console.log('jobs', jobs);
 
   useEffect(() => {
-    dispatch(fetchJobs() as any);
-  }, [dispatch]);
+    dispatch(fetchJobs({ search: search }) as any);
+  }, [dispatch, search]);
 
   const fetchJobsPerPage = useCallback(
-    ({ page = 0 }) => {
-      dispatch(fetchJobs({ page }) as any);
+    ({ page = 0, searchText = search }) => {
+      dispatch(fetchJobs({ page, search: searchText }) as any);
     },
     [dispatch],
   );
@@ -39,7 +42,7 @@ export function JobsPage() {
           </Grid>
         ))}
       </Grid>
-      <Container maxWidth="sm" style={{marginTop: '20px', marginBottom: '20px'}}>
+      <Container maxWidth="sm" style={{ marginTop: '20px', marginBottom: '20px' }}>
         <Pagination
           count={total_page}
           page={page}
@@ -50,6 +53,6 @@ export function JobsPage() {
       </Container>
     </ThemeProvider>
   );
-}
+};
 
 export default JobsPage;
