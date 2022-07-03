@@ -38,12 +38,13 @@ const Form = styled('form')`
 const Buttons = styled('div')`
   margin: 0 auto;
 `;
-export const formValidation = yup.object().shape({
+const formValidation = yup.object().shape({
   email: yup
     .string()
     .required('**Почта обязательна!')
     .max(50, '**Длина пароля должна быть не менее 8 символов!')
     .matches(/^\S+@\S+$/i, '**Не правильный формат!'),
+  name: yup.string().required('**Имя обязателльно!'),
   password: yup
     .string()
     .required('**Пароль обязателен!')
@@ -65,9 +66,9 @@ const SignUp: FC<Props> = ({ login }) => {
 
   const [text, setText] = useState('');
   const {
-        register,
-        formState: { errors },
-        handleSubmit,
+    register,
+    formState: { errors },
+    handleSubmit,
   } = useForm<User>({
     mode: 'onTouched',
     resolver: yupResolver(formValidation),
@@ -106,13 +107,32 @@ const SignUp: FC<Props> = ({ login }) => {
         localStorage.setItem('idToken', data.data.idToken);
         setTimeout(() => {
           navigate('/');
-        }, 3000);
+        }, 1000);
       })
       .catch((error) => {
         console.log({ ...error });
         setText('Такой пользователь уже существует!');
         setIsOpen(true);
       });
+    // auth
+    //   .createUserWithEmailAndPassword(userData.email, userData.password)
+    //   .then((auth: any) => {
+    //     if (auth) {
+    //       navigate('/');
+    //       db.collection('users').add({
+    //         uid: auth.user.uid,
+    //         name: userData.name,
+    //         email: userData.email,
+    //         role: 'user',
+    //       });
+    //       setText('User registeration successful!');
+    //       setIsOpen(true);
+    //     }
+    //   })
+    //   .catch((err: any) => {
+    //     setText(err.message);
+    //     setIsOpen(true);
+    //   });
   };
 
   return (
@@ -132,14 +152,11 @@ const SignUp: FC<Props> = ({ login }) => {
                 <OutlinedInput {...register('email')} id="email" type="text" label="E-mail" />
                 {errors.email?.message}
               </FormControl>
-              {/* <FormControl sx={{ m: 1 }} variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-password">Имя пользователя</InputLabel>
-                <OutlinedInput
-                  id="outlined-adornment-password"
-                  type="text"
-                  label="Имя пользователя"
-                />
-              </FormControl> */}
+              <FormControl sx={{ m: 1 }} variant="outlined">
+                <InputLabel htmlFor="name">Имя</InputLabel>
+                <OutlinedInput {...register('name')} id="name" type="text" label="Name" />
+                {errors.name?.message}
+              </FormControl>
               <FormControl sx={{ m: 1 }} variant="outlined">
                 <InputLabel htmlFor="password">Пароль</InputLabel>
                 <OutlinedInput

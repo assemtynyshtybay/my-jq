@@ -32,8 +32,8 @@ function App() {
         <Routes>
           <Route path="/sign-in" element={<SignIn login={login} />} />
           <Route path="/sign-up" element={<SignUp login={login} />} />
-          <Route path="/" element={<MainPage />} />
-          <Route path="/about-us" element={<MainPage />} />
+          <Route path="/" element={<MainPage token={token} />} />
+          <Route path="/about-us" element={<MainPage token={token} />} />
           <Route path="/job-details/:id" element={<JobDetails />} />
           <Route path="/profile" element={<Profile />} />
         </Routes>

@@ -40,23 +40,25 @@ type Props = {
 export const JobItem: FC<Props> = ({ job }) => {
   const navigate = useNavigate();
   return (
-    <Box>
-      <Company>{job.employer.name}</Company>
-      <Title>{job.name}</Title>
-      <Description>{job.area.name}</Description>
-      <Description>{job.schedule.name}</Description>
+    <Container fixed>
+      <Box>
+        <Company>{job.employer.name}</Company>
+        <Title>{job.name}</Title>
+        <Description>{job.area.name}</Description>
+        <Description>{job.schedule.name}</Description>
 
-      {/* <Time>Создано: {job.published_at}</Time> */}
+        {/* <Time>Создано: {job.published_at}</Time> */}
 
-      <Salary>
-        {job.salary?.from}тг до {job.salary?.to}тг{' '}
-      </Salary>
-      <Button
-        variant="contained"
-        onClick={() => navigate(`/job-details/${+job.id}`)}
-        style={{ fontSize: '15px', padding: '6px', color: 'white', backgroundColor: '#9D355D' }}>
-        Посмотреть
-      </Button>
-    </Box>
+        <Salary>
+          {job.salary?.from}тг до {job.salary?.to}тг{' '}
+        </Salary>
+        <Button
+          variant="contained"
+          onClick={() => navigate(`/job-details/${+job.id}`)}
+          style={{ fontSize: '15px', padding: '6px', color: 'white', backgroundColor: '#9D355D' }}>
+          Посмотреть
+        </Button>
+      </Box>
+    </Container>
   );
 };
