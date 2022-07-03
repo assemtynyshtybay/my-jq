@@ -3,7 +3,9 @@ import { Button, styled } from '@mui/material';
 import { Job } from '../types/jobsTypes';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import Loc from '../../assets/Lock.svg'
+import Loc from '../../assets/Lock.svg';
+import icons from '../../assets/icons.png'
+
 
 const Box = styled('div')`
   width: 50%;
@@ -65,7 +67,16 @@ const Location =styled("div")`
 
 `
 const Img=styled('img')`
-  height: 3vmin; 
+  height: 5vmin;
+  /* display: flex; */
+
+ 
+
+`
+const ImgLike=styled('img')`
+   height: 5vmin; 
+   
+  ;
 `
 
 const JobDetails = () => {
@@ -92,13 +103,15 @@ const JobDetails = () => {
     <>
       {job && (
         <Box>
-          <Title>
-            {job.name} / {job.schedule.name}
+
+          <Title>  
+          {job.name} / {job.schedule.name}<Button><ImgLike src={icons} /></Button>
           </Title>
+
           <Time>Вакансия опубликована: {job.published_at}</Time>
           
           <Location><Img src={Loc} className="Loc-logo" alt="l-logo" /> {job.area.name}</Location>
-          
+    
           <Salary>
 
             Зарплата:

@@ -5,7 +5,8 @@ import SignIn from './components/authorization/signIn';
 import SignUp from './components/authorization/signUp';
 import JobDetails from './components/job/JobDetail';
 import { Navbar } from './components/Navbar/Navbar';
-import { MainPage } from './components/pages/MainPage';
+import Favourites from './components/pages/Favourites';
+import  MainPage  from './components/pages/MainPage';
 import Profile from './components/profile/profile';
 import { Auth } from './context/Auth';
 
@@ -36,6 +37,7 @@ function App() {
           <Route path="/about-us" element={<MainPage />} />
           <Route path="/job-details/:id" element={<JobDetails />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/favourites" element={<Favourites />} />
         </Routes>
       </BrowserRouter>
     </Auth.Provider>

@@ -1,6 +1,8 @@
+import { Favorite } from '@mui/icons-material';
 import { Container, styled } from '@mui/material';
 import { useCallback, useState } from 'react';
 import { Search } from '../search-panel/Search';
+import Favourites from './Favourites';
 import JobsPage from './JobsPage';
 
 
@@ -27,7 +29,9 @@ const MainPage = () => {
     <Header>Мы нашли для вас работу!</Header>
       <Search getSearchPanelData={handleGetSearchPanelData} />
       <JobsPage search={search} />
+      <Favourites />
     </Container>
+  
   );
 }
 export default MainPage;
