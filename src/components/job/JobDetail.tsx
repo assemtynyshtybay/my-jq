@@ -14,6 +14,7 @@ const Box = styled('div')`
   margin: 0 auto;
   padding: 50px;
  font-size: 45px;
+ position: relative;
 
   /* background: linear-gradient(180deg, rgba(29, 29, 29, 0) 0%, rgba(29, 29, 29, 0.8) 80.79%); */
 `;

@@ -18,6 +18,7 @@ const Box = styled('div')`
   box-shadow: 0px 1px 4px rgba(119, 97, 97, 0);
   background: #ffffff;
   border-radius: 20px;
+  position: relative;
 
   /* background: linear-gradient(180deg, rgba(29, 29, 29, 0) 0%, rgba(29, 29, 29, 0.8) 80.79%); */
 `;
@@ -44,14 +45,11 @@ height: auto;
 export const JobItem: FC<Props> = ({ job }) => {
   const navigate = useNavigate();
   return (
-    <Box>
+    <Box > 
       <Company>{job.employer.name}<Button><ImgFav src={icons}/></Button></Company>
       <Title>{job.name}</Title>
       <Description>{job.area.name}</Description>
       <Description>{job.schedule.name}</Description>
-
-      {/* <Time>Создано: {job.published_at}</Time> */}
-
       <Salary>
         {job.salary?.from}тг до {job.salary?.to}тг{' '}
       </Salary>

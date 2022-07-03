@@ -1,5 +1,5 @@
 import { Favorite } from '@mui/icons-material';
-import { Container, styled } from '@mui/material';
+import { Container, FormControl, Grid, styled } from '@mui/material';
 import { useCallback, useState } from 'react';
 import { Search } from '../search-panel/Search';
 import Favourites from './Favourites';
@@ -24,13 +24,15 @@ const MainPage = () => {
   const handleGetSearchPanelData = useCallback((data: any) => {
     setSearch(data);
   }, []);
-  return (
-    <Container fixed>
-    <Header>Мы нашли для вас работу!</Header>
+  return (   
+    <Container >
+      <Grid item xs={12} md ={3} sm = {6} ></Grid>
+    <Header>Мы нашли для вас работу!  </Header>
       <Search getSearchPanelData={handleGetSearchPanelData} />
       <JobsPage search={search} />
-      <Favourites />
+      <Favourites />   
     </Container>
+  
   
   );
 }
