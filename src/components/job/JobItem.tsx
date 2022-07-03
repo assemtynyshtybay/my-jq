@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Job } from '../types/jobsTypes';
 import icons from '../../assets/icons.png';
+import moment from 'moment';
 
 const Box = styled('div')`
   text-align: start;
@@ -23,7 +24,12 @@ const Box = styled('div')`
   /* background: linear-gradient(180deg, rgba(29, 29, 29, 0) 0%, rgba(29, 29, 29, 0.8) 80.79%); */
 `;
 
-const Company = styled('div')``;
+const Company = styled('div')`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: right;
+`;
 
 const Title = styled('div')`
   font-weight: bold;
@@ -43,10 +49,17 @@ const ImgFav = styled('img')`
   height: auto;
 `;
 export const JobItem: FC<Props> = ({ job }) => {
+  const time = moment(job.published_at).format('hh:mm DD/MM');
   const navigate = useNavigate();
   return (
-    <Box > 
-      <Company>{job.employer.name}<Button><ImgFav src={icons}/></Button></Company>
+    <Box>
+      <Company>
+        {job.employer.name}
+        <Button>
+          <ImgFav src={icons} />
+        </Button>
+        <Description>{time}</Description>
+      </Company>
       <Title>{job.name}</Title>
       <Description>{job.area.name}</Description>
       <Description>{job.schedule.name}</Description>
