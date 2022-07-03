@@ -1,6 +1,8 @@
+import { Favorite } from '@mui/icons-material';
 import { Container, styled } from '@mui/material';
 import { FC, useCallback, useState } from 'react';
 import { Search } from '../search-panel/Search';
+import Favourites from './Favourites';
 import JobsPage from './JobsPage';
 
 const Header = styled('h1')`
@@ -27,7 +29,9 @@ const MainPage: FC<Props> = ({token}) => {
       )}
       <Search getSearchPanelData={handleGetSearchPanelData} token={token}/>
       <JobsPage search={search} />
+      <Favourites />
     </Container>
+  
   );
 };
 export default MainPage;
