@@ -6,8 +6,8 @@ import icons from '../../assets/icons.png';
 
 const Box = styled('div')`
   text-align: start;
-  width: 340px;
-  height: 340px;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   padding: 25px;
