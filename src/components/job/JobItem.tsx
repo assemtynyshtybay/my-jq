@@ -2,7 +2,7 @@ import { Button, Container, styled } from '@mui/material';
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Job } from '../types/jobsTypes';
-import icons from '../../assets/icons.png'
+import icons from '../../assets/icons.png';
 
 const Box = styled('div')`
   text-align: start;
@@ -39,9 +39,9 @@ const Salary = styled('div')``;
 type Props = {
   job: Job;
 };
-const ImgFav = styled("img")`
-height: auto;
-`
+const ImgFav = styled('img')`
+  height: auto;
+`;
 export const JobItem: FC<Props> = ({ job }) => {
   const navigate = useNavigate();
   return (
