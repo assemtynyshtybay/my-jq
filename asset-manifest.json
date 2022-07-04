@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/my-jq.github.io/static/css/main.5fb5c684.css",
+    "main.js": "/my-jq.github.io/static/js/main.bf552959.js",
+    "static/js/787.2beda63d.chunk.js": "/my-jq.github.io/static/js/787.2beda63d.chunk.js",
+    "static/media/logo_jq.svg": "/my-jq.github.io/static/media/logo_jq.07ef9aefd17f57f43bf370d59f4c2984.svg",
+    "static/media/Lock.svg": "/my-jq.github.io/static/media/Lock.583d37a71c344c90cc1fb788b5e7fdf3.svg",
+    "static/media/search-svgrepo-com.svg": "/my-jq.github.io/static/media/search-svgrepo-com.d31d836d3650881f2c185acfdd291dff.svg",
+    "index.html": "/my-jq.github.io/index.html",
+    "main.5fb5c684.css.map": "/my-jq.github.io/static/css/main.5fb5c684.css.map",
+    "main.bf552959.js.map": "/my-jq.github.io/static/js/main.bf552959.js.map",
+    "787.2beda63d.chunk.js.map": "/my-jq.github.io/static/js/787.2beda63d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5fb5c684.css",
+    "static/js/main.bf552959.js"
+  ]
+}
