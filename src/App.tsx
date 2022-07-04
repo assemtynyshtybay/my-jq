@@ -28,7 +28,7 @@ function App() {
         login: login,
         logout: logout,
       }}>
-      <BrowserRouter>
+      
         <Navbar token={token} logout={logout} />
         <Routes>
           <Route path="/sign-in" element={<SignIn login={login} />} />
@@ -39,7 +39,7 @@ function App() {
           <Route path="/profile/:id" element={<Profile />} />
           {token && <Route path="/favourites" element={<Favourites token={token} />} />}
         </Routes>
-      </BrowserRouter>
+      
     </Auth.Provider>
   );
 }
