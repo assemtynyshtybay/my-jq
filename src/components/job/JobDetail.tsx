@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Button, styled } from '@mui/material';
-import { Job } from '../types/jobsTypes';
+import { Job, JobActionType } from '../types/jobsTypes';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
@@ -89,6 +89,10 @@ const JobDetails = () => {
 
   const [similarJobs, setSimilarJobs] = useState<Job[]>();
   const navigate = useNavigate();
+  const handleLike = useCallback( (job: Job)=>{ 
+    dispatch({type: JobActionType.ADD_FAVOUR, payload: job})
+  }, [dispatch])
+
   useEffect(() => {
     fetch(`https://api.hh.ru/vacancies/${params.id}`)
       .then((res) => res.json())
@@ -108,7 +112,8 @@ const JobDetails = () => {
         <Box>
           <Title>
             {job.name} / {job.schedule.name}
-            <Button>
+            <Button onClick = { () => handleLike(job) }
+            >
               <ImgLike src={icons} />
             </Button>
           </Title>
