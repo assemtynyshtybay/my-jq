@@ -1,8 +1,17 @@
 export enum JobActionType {
     FETCH_JOBS = 'FETCH_JOBS',
     FETCH_PAGE = 'FETCH_PAGE',
+    FETCH_FAVOUR = 'ADD_FAVOUR',
+    ADD_FAVOUR = "ADD_FAVOUR",
+    GET_FAVOUR="GET_FAVOUR"
 };
-
+export type Profile = {
+    email: string;
+    phone: string;
+    fname: string;
+    sname:string;
+    
+}
 export type Job = {
     id: string;
     name: string;
@@ -46,6 +55,7 @@ export type JobState = {
     page: number;
     total_page: number;
     per_page: number;
+    favourites: Job[];
 };
 export type FetchJobAction = {
     type: JobActionType.FETCH_JOBS,
@@ -55,7 +65,13 @@ export type FetchPageInfo = {
     type: JobActionType.FETCH_PAGE,
     payload: any;
 };
-
-
-export type JobAction = FetchJobAction | FetchPageInfo;
+export type FetchFavour = {
+    type: JobActionType.GET_FAVOUR,
+    payload: any;
+};
+export type FetchAddFavour = {
+    type: JobActionType.ADD_FAVOUR,
+    payload: any;
+};
+export type JobAction = FetchJobAction | FetchPageInfo | FetchFavour | FetchAddFavour;
  

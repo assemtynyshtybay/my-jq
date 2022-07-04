@@ -26,7 +26,6 @@ const MainPage: FC<Props> = ({ token }) => {
       <Header>Мы нашли для вас работу! </Header>
       <Search getSearchPanelData={handleGetSearchPanelData} token={token} />
       <JobsPage search={search} />
-      <Favourites />
     </Container>
   );
 };

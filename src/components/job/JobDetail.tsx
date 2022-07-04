@@ -40,7 +40,7 @@ const SimilarJobs = styled('div')`
   padding: 48px 0px;
   width: 55%;
   overflow-x: auto;
-  background: linear-gradient(180deg, #9D355D 0%, rgba(29, 29, 29, 0.8) 99.79%);
+  background: linear-gradient(180deg, #9d355d 0%, rgba(29, 29, 29, 0.8) 99.79%);
 `;
 const Title = styled('div')`
   font-weight: bold;
@@ -98,7 +98,6 @@ const JobDetails = () => {
         return res.json();
       })
       .then((data) => {
-        console.log('similar', data);
         setSimilarJobs(data.items);
       });
   }, [params.id]);
@@ -113,7 +112,6 @@ const JobDetails = () => {
               <ImgLike src={icons} />
             </Button>
           </Title>
-
           <Time>
             Вакансия опубликована:&nbsp;{moment(job.published_at).format('hh:mm DD/MM/YYYY')}
           </Time>
@@ -134,6 +132,9 @@ const JobDetails = () => {
 
           <Button
             variant="contained"
+            onClick={() => {
+              navigate(`/profile/${job.id}`);
+            }}
             style={{
               fontSize: '15px',
               padding: '10px',

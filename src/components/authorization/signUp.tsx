@@ -100,7 +100,6 @@ const SignUp: FC<Props> = ({ login }) => {
         },
       )
       .then((data) => {
-        console.log(data.data.idToken);
         setText('Успешно✅');
         setIsOpen(true);
         login(data.data.idToken);
@@ -110,29 +109,9 @@ const SignUp: FC<Props> = ({ login }) => {
         }, 1000);
       })
       .catch((error) => {
-        console.log({ ...error });
         setText('Такой пользователь уже существует!');
         setIsOpen(true);
       });
-    // auth
-    //   .createUserWithEmailAndPassword(userData.email, userData.password)
-    //   .then((auth: any) => {
-    //     if (auth) {
-    //       navigate('/');
-    //       db.collection('users').add({
-    //         uid: auth.user.uid,
-    //         name: userData.name,
-    //         email: userData.email,
-    //         role: 'user',
-    //       });
-    //       setText('User registeration successful!');
-    //       setIsOpen(true);
-    //     }
-    //   })
-    //   .catch((err: any) => {
-    //     setText(err.message);
-    //     setIsOpen(true);
-    //   });
   };
 
   return (

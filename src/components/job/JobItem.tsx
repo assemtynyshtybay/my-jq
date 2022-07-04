@@ -1,9 +1,10 @@
 import { Button, Container, styled } from '@mui/material';
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Job } from '../types/jobsTypes';
+import { Job, JobActionType } from '../types/jobsTypes';
 import icons from '../../assets/icons.png';
 import moment from 'moment';
+import { useDispatch } from 'react-redux';
 
 const Box = styled('div')`
   text-align: start;
@@ -50,12 +51,16 @@ const ImgFav = styled('img')`
 `;
 export const JobItem: FC<Props> = ({ job }) => {
   const time = moment(job.published_at).format('hh:mm DD/MM');
+  const dispatch = useDispatch()
   const navigate = useNavigate();
+  const handleLike =()=>{
+    dispatch({type: JobActionType.ADD_FAVOUR, payload: job})
+  }
   return (
     <Box>
       <Company>
         {job.employer.name}
-        <Button>
+        <Button onClick={handleLike}>
           <ImgFav src={icons} />
         </Button>
         <Description>{time}</Description>

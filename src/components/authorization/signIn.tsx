@@ -61,7 +61,6 @@ const SignIn: FC<Props> = ({ login }) => {
   });
 
   const onSubmit = (data: User) => {
-    console.log(data);
     setUserData(data);
   };
 
@@ -85,7 +84,6 @@ const SignIn: FC<Props> = ({ login }) => {
         },
       )
       .then((data) => {
-        console.log(data.data.idToken);
         login(data.data.idToken);
         localStorage.setItem('idToken', data.data.idToken);
         setTimeout(() => {
@@ -93,7 +91,6 @@ const SignIn: FC<Props> = ({ login }) => {
         }, 3000);
       })
       .catch((error) => {
-        console.log({ ...error });
         setText('Такой пользователь не существует!');
         alert(`Failed to Authorize. Error message: ${error.response.data.error.message}`);
       });

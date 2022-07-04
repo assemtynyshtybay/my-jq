@@ -19,12 +19,9 @@ type Props = {
   search: any;
 };
 const JobsPage: FC<Props> = ({ search }) => {
-  console.log('search', search);
   const jobs = useTypedSelector((state: any) => state.job.jobs);
   const { page, total_page } = useTypedSelector((state: any) => state.job);
-  console.log('pageinfo', page, total_page);
   const dispatch = useDispatch();
-  console.log('jobs', jobs);
 
   useEffect(() => {
     dispatch(fetchJobs({ search: search }) as any);
@@ -46,14 +43,19 @@ const JobsPage: FC<Props> = ({ search }) => {
           columnSpacing={{ xs: 1, sm: 2, md: 5 }}
           columns={{ xs: 2, sm: 8, md: 12 }}>
           {jobs?.map((item: any) => (
-            <Grid item xs={2} sm={4} md={4}>
-              <JobItem key={item.id} job={item} />
+            <Grid key={item.id} item xs={2} sm={4} md={4}>
+              <JobItem job={item} />
             </Grid>
           ))}
         </Grid>
         <Container
           maxWidth="xl"
-          style={{ marginLeft: '50%',marginTop: '20px', marginBottom: '20px',transform: 'translate(-25%, 50%)'}}>
+          style={{
+            marginLeft: '50%',
+            marginTop: '20px',
+            marginBottom: '20px',
+            transform: 'translate(-25%, 50%)',
+          }}>
           <Pagination
             count={total_page}
             page={page}

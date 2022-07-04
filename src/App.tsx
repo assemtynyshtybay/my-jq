@@ -6,13 +6,13 @@ import SignUp from './components/authorization/signUp';
 import JobDetails from './components/job/JobDetail';
 import { Navbar } from './components/Navbar/Navbar';
 import Favourites from './components/pages/Favourites';
-import  MainPage  from './components/pages/MainPage';
+import MainPage from './components/pages/MainPage';
 import Profile from './components/profile/profile';
 import { Auth } from './context/Auth';
 
 function App() {
   const [token, setToken] = useState<string | null>(localStorage.getItem('idToken') || null);
-
+  localStorage.setItem('fav', JSON.stringify([]));
   const login = useCallback((token: string) => {
     setToken(token);
   }, []);
@@ -36,8 +36,8 @@ function App() {
           <Route path="/" element={<MainPage token={token} />} />
           <Route path="/about-us" element={<MainPage token={token} />} />
           <Route path="/job-details/:id" element={<JobDetails />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/favourites" element={<Favourites />} />
+          <Route path="/profile/:id" element={<Profile />} />
+          {token && <Route path="/favourites" element={<Favourites token={token} />} />}
         </Routes>
       </BrowserRouter>
     </Auth.Provider>

@@ -43,16 +43,9 @@ export const Navbar: FC<Props> = ({ token, logout }) => {
               <div style={{ display: 'flex' }}>
                  <Box sx={{ flexGrow: 0 }}>
                   <Button
-                    onClick={() => navigate('/profile')}
+                    onClick={() => navigate('/favourites')}
                     sx={{ my: 2, color: 'white', display: 'block' }}>
                     Избранные 
-                  </Button>
-                </Box>
-                <Box sx={{ flexGrow: 0 }}>
-                  <Button
-                    onClick={() => navigate('/profile')}
-                    sx={{ my: 2, color: 'white', display: 'block' }}>
-                    Профиль
                   </Button>
                 </Box>
                 <Box sx={{ flexGrow: 0 }}>

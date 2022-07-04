@@ -8,6 +8,7 @@ const initState: JobState = {
     total_page: 166, 
     per_page: 20,
     loading: false ,
+    favourites: [] 
 };
 
 export const jobs: Reducer<JobState, JobAction> = (
@@ -23,11 +24,16 @@ export const jobs: Reducer<JobState, JobAction> = (
             case JobActionType.FETCH_PAGE:
                 newState.page = action.payload.page;
                 newState.total_page = action.payload.total_pages;
-                console.log('page',newState.page)
                 break
+            case JobActionType.ADD_FAVOUR:
+                newState.favourites=[...newState.favourites,action.payload];
+                break;
+            case JobActionType.GET_FAVOUR:
+                newState.favourites=action.payload;
+                break;
             default:
                 return state;
     }
-    
+    localStorage.setItem('fav',JSON.stringify(newState.favourites));
     return newState;
 };
